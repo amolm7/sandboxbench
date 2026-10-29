@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sandboxbench"
+version = "0.1.0"
+description = "Reproducible synthetic coding-task benchmarks on E2B sandboxes"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["e2b-code-interpreter>=2.3,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+sandboxbench = "sandboxbench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["results", "candidates"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
